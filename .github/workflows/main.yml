@@ -1,0 +1,25 @@
+name: Demo workflow
+
+on: workflow_dispatch
+
+jobs:
+  print-stuff:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: pwd
+    - name: List files
+      run: cd todo.cli; ls
+  build-project:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .net
+      uses: actions/setup-dotnet@v4.1.0
+      with: 
+        dotnet-version: 9
+    - name: debug
+      run: pwd; ls -lah;
+    - name: Build project
+      run: cd todo.cli; dotnet build
+  
